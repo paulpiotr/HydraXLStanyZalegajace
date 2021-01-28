@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4D48F456-CE99-4723-8BC8-DC0B6DD794CF}</ProjectGuid>
+    <ProjectGuid>{C3F4216E-0807-4C70-8517-B0420C13CCC2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HydraXLStanyZalegajace.Core</RootNamespace>
-    <AssemblyName>HydraXLStanyZalegajace.Core</AssemblyName>
+    <RootNamespace>ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprBase</RootNamespace>
+    <AssemblyName>ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprBase</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,8 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CdnHydra, Version=2019.3.0.0, Culture=neutral, PublicKeyToken=4b3653aa0a875d04, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Comarch ERP XL 2019.3\CdnHydra.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,8 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\StanyZalegajace.cs" />
+    <Compile Include="Callbacks\ZaNZamEdycjaSprCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XLHydraZaNZamEdycjaSprChild\XLHydraZaNZamEdycjaSprChild.csproj">
+      <Project>{607d3c50-976d-492b-95a8-a1142b6cc467}</Project>
+      <Name>XLHydraZaNZamEdycjaSprChild</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

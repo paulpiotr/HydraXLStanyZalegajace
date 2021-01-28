@@ -1,37 +1,56 @@
-# You've added your first ReadMe file!
-A README.md file is intended to quickly orient readers to what your project can do.  New to Markdown? [Learn more](https://go.microsoft.com/fwlink/p/?LinkId=524306&clcid=0x409)
+# Stany zalegające
+## Dodatki dla programu Comarch ERP XL 2019.3
 
-## Edit this ReadMe and commit your change to a topic branch
-In Git, branches are cheap.  You should use them whenever you're making changes to your repository.  Edit this file by clicking on the edit icon.
+## Informacje
 
-Then make some changes to this ReadMe file.
+##### Dodatki zostały skompilowane z wersją programu Comarch ERP XL 2019.3 z zestawem CdnHydra 2019.3.0.0 v4.0.30319 dla środowiska .NET Framework 4.7 i procesorów z rodziny x86
 
-> Make some **edits** to _this_ blockquote
+##### Kompilacja programu została ustawiona bezpośrednio do katalogu programu 
 
-When you are done, click the dropdown arrow next to the save button - that will allow you to commit your changes to a new branch.
+```
+C:\Program Files (x86)\Comarch ERP XL 2019.3
+```
 
-## Create a pull request to contribute your changes back into master
-Pull requests are the way to move changes from a topic branch back into the master branch.
+##### W celu zmiany katalogu wyjściowego należy zmianić ścieżkę wyjścia w właściwościach projektu zakładka "Kompilacja"
 
-Click on the **Pull Requests** page in the **CODE** hub, then click "New Pull Request" to create a new pull request from your topic branch to the master branch.
+## Instalacja dodatku
 
-When you are done adding details, click "Create Pull request". Once a pull request is sent, reviewers can see your changes, recommend modifications, or even push follow-up commits.
+##### 1) Wyłączyć program XL i wszystkie jego instancje oraz okna
+##### 2) Skopiować wszystkie pliki do katalogu instalacji programu XL domyśny katalog instalacji programu XL znajduje się w lokalizacji:
 
-First time creating a pull request?  [Learn more](https://go.microsoft.com/fwlink/?LinkId=533211&clcid=0x409)
+```
+C:\Program Files (x86)\Comarch ERP XL 2019.3
+```
 
-### Congratulations! You've completed the grand tour of the CODE hub!
+###### Lista plików do skopiowania
 
-# Next steps
+```
+-rwxr-xr-x 1 piotr.paul 1049089  5120 Jan 28 12:15 HydraXLStanyZalegajace.Core.dll
+-rwxr-xr-x 1 piotr.paul 1049089 10240 Jan 28 12:15 HydraXLStanyZalegajace.Forms.dll
+-rwxr-xr-x 1 piotr.paul 1049089  5632 Jan 28 12:15 ZaNOfeEdycja.XLHydraZaNOfeEdycjaBase.dll
+-rwxr-xr-x 1 piotr.paul 1049089 10240 Jan 28 12:15 ZaNOfeEdycja.XLHydraZaNOfeEdycjaChild.dll
+-rwxr-xr-x 1 piotr.paul 1049089  5632 Jan 28 12:15 ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprBase.dll
+-rwxr-xr-x 1 piotr.paul 1049089 10240 Jan 28 12:15 ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprChild.dll
+```
 
-If you haven't already done so, [install Git](https://git-scm.com/downloads) (as well as [Git Credential Manager](https://java.visualstudio.com/Downloads/gitcredentialmanager/Index) for Linux or Mac OS)
+##### 3) Dodanie dodatku do programu XL
 
-Choose and install one of these supported IDEs:
-* [Visual Studio](https://go.microsoft.com/fwlink/?LinkId=309297&clcid=0x409&slcid=0x409)
-* [Android Studio](https://developer.android.com/studio) (with [Team Services Plugin](https://java.visualstudio.com/Downloads/intellijplugin/Index))
-* [Eclipse](https://www.eclipse.org/downloads) (with [Team Explorer Everywhere](https://java.visualstudio.com/Downloads/eclipseplugin/Index))
-* [IntelliJ IDEA](https://www.jetbrains.com/idea/download) (with [Team Services Plugin](https://java.visualstudio.com/Downloads/intellijplugin/Index))
-* [Visual Studio Code](https://code.visualstudio.com/Download) (with [Team Services Extension](https://java.visualstudio.com/Downloads/visualstudiocode/Index))
-
-Then clone this repo to your local machine to get started with your own project.
-
-Happy coding!
+```
+1) Uruchomić narzędzie Administrator programu XL domyślnia lokalizacja programu:
+"C:\Program Files (x86)\Comarch ERP XL 2019.3\CDNADM.EXE"
+2) Zalogować się danymi operatora z uprawnieniami Administratora
+3) Kliknąć System / Dodatki - menu w lewym górnym rogu programu
+4) Kliknąć Importuj
+5) Wybrać plik "ZaNOfeEdycja.XLHydraZaNOfeEdycjaBase.dll" z głónej lokalizacji programu XL po uprzednim skopiowaniu (punkt 2)
+6) Kliknąć Edytuj w oknie
+7) Zaznaczyć Aktywny
+8) Kliknąć Zapisz
+9) Punkty 4,5,6,7,8 ponowić wybierając plik "ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprBase.dll"
+10) Kliknąć Struktura firmy w menu Ogólne
+11) Kliknąć dwa razy w Firma Główna (lub inna nazwa firmy dla której instalujemy dodatek) - Edycja struktury firmy
+12) Wybrać Tab "Dodatki" (Przewijany pasek ze strzałkami)
+13) Kliknąć ikonę plusa (Dodaj)
+14) Wybrać zainstalowany dodatek "Stany zalegające w zakładce oferty."
+15) Kliknąć ikonę dyskietki (Zapisz)
+16) Punkty 10, 11, 12, 13, 14, 15 wykonać dla drugiego dodatku "Stany zalegające w zakładce zamówienia."
+```
