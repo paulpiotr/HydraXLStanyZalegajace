@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using Hydra;
 using HydraXLStanyZalegajace.Core.Models;
+using HydraXLStanyZalegajace.Core.Repositories;
 using HydraXLStanyZalegajace.Forms.Forms;
 
 #endregion
@@ -20,9 +21,9 @@ using HydraXLStanyZalegajace.Forms.Forms;
     "2019.3.0.0",
     "25-01-2021")]
 
-namespace ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprChild.Callbacks
+namespace ZaEEdycja.XLHydraZaEEdycjaChild.Callbacks
 {
-    public class ZaNZamEdycjaSprCallback : Callback
+    public class ZaEEdycjaCallback : Callback
     {
         private Callback _parentCallback;
 
@@ -34,7 +35,7 @@ namespace ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprChild.Callbacks
 
         private List<StanyZalegajace> _stanyZalegajaceList = new List<StanyZalegajace>();
 
-        public ZaNZamEdycjaSprCallback(Callback callback)
+        public ZaEEdycjaCallback(Callback callback)
         {
             ParentCallback = callback;
         }
@@ -125,37 +126,31 @@ namespace ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprChild.Callbacks
                 _parentCallback.GetControl(controlId).Enabled = false;
                 _parentCallback.GetControl(controlId).Visible = false;
                 StanyZalegajaceList.Clear();
-                var zaNGidNumer = new SqlParameter("zaNGidNumer", SqlDbType.NVarChar) {Value = ZamNag.ZaN_GIDNumer};
-                var sql = "" +
-                          " SELECT * " +
-                          " FROM [CDN].[ZamNag] zn" +
-                          " LEFT JOIN [CDN].[ZamElem] ze" +
-                          " ON zn.ZaN_GIDNumer = ze.ZaE_GIDNumer" +
-                          " WHERE zn.ZaN_GIDNumer = " +
-                          zaNGidNumer.Value +
-                          "";
+                var cKopTwrKodValueRaw =
+                    Convert.ToString(ParentCallback.GetWindow().Children["?cKop_Twr:Kod"].ValueRaw);
                 SqlConnection sqlConnection = Runtime.ActiveRuntime.Repository.Connection.CreateCommand().Connection;
-                sqlConnection.Open();
-                var sqlCommand = new SqlCommand(sql, sqlConnection);
-                SqlDataReader dataReader = sqlCommand.ExecuteReader();
-                while (dataReader.Read())
+                var twrKartyRepository = new TwrKartyRepository();
+                var twrGidNumer = twrKartyRepository.GetTwrGIDNumerByTwrKod(sqlConnection, cKopTwrKodValueRaw);
+                if (twrKartyRepository.HasException())
                 {
-                    var zaETwrNumer = (long)Convert.ToDouble(dataReader["ZaE_TwrNumer"].ToString());
-                    var stanyZalegajace = new StanyZalegajace();
-                    //{
-                    //    //Barcode = $"Barcode {zaETwrNumer}",
-                    //    //Currency = $"Currency {zaETwrNumer}",
-                    //    //Price = $"Price {zaETwrNumer}"
-                    //};
-                    StanyZalegajaceList.Add(stanyZalegajace);
+                    MessageBox.Show($@"{twrKartyRepository.TwrKartyRepositoryException.Message}
+{twrKartyRepository.TwrKartyRepositoryException.StackTrace}");
                 }
-
-                dataReader.Close();
-                sqlCommand.Connection.Close();
+                if (twrGidNumer > 0)
+                {
+                    StanyZalegajaceList =
+                        twrKartyRepository.ISKZasobyNierotujaceZSOSStoredProcedure(sqlConnection, twrGidNumer);
+                    if (twrKartyRepository.HasException())
+                    {
+                        MessageBox.Show($@"{twrKartyRepository.TwrKartyRepositoryException.Message}
+{twrKartyRepository.TwrKartyRepositoryException.StackTrace}");
+                    }
+                }
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"{e.Message}");
+                MessageBox.Show($@"{e.Message}
+{e.StackTrace}");
             }
 
             return true;
@@ -179,6 +174,7 @@ namespace ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprChild.Callbacks
                     _stanyZalegajaceForm.Show();
                     _stanyZalegajaceForm.Closed += WindowOnClosed;
                     _stanyZalegajaceForm.Closing += WindowOnClosing;
+                    _stanyZalegajaceForm.BringToFront();
                     return false;
                 }
 

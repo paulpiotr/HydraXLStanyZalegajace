@@ -9,19 +9,7 @@ if [[ ! -z $(tasklist | grep CDNSPR.EXE | awk '{ print $2 }') ]]; then
     taskkill //PID $(tasklist | grep CDNSPR.EXE | awk '{ print $2 }') //F
 fi
 
-#echo "dotnet build \"XLHydraZaNOfeEdycjaBase.csproj\" -c Release"
-
-#cd "D:/Praca/HydraXLStanyZalegajace/src/ZaNOfeEdycja/XLHydraZaNOfeEdycjaBase"
-
-#dotnet build "XLHydraZaNOfeEdycjaBase.csproj" -c Release
-
-#echo "dotnet build \"XLHydraZaNZamEdycjaSprBase.csproj\" -c Release"
-
-#cd "D:/Praca/HydraXLStanyZalegajace/src/ZaNZamEdycjaSpr/XLHydraZaNZamEdycjaSprBase"
-
-#dotnet build "XLHydraZaNZamEdycjaSprBase.csproj" -c Release
-
-#echo "START CDNSPR.EXE"
+echo "dotnet build \"XLHydraZaEEdycjaBase.csproj\" -c Release"
 
 cd "D:/Praca/HydraXLStanyZalegajace/src/ZaEEdycja/XLHydraZaEEdycjaBase"
 

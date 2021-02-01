@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3F4216E-0807-4C70-8517-B0420C13CCC2}</ProjectGuid>
+    <ProjectGuid>{6030210D-0086-418E-B4D8-45BD527BA297}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprBase</RootNamespace>
-    <AssemblyName>ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprBase</AssemblyName>
+    <RootNamespace>ZaEEdycja.XLHydraZaEEdycjaBase</RootNamespace>
+    <AssemblyName>ZaEEdycja.XLHydraZaEEdycjaBase</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -47,13 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Callbacks\ZaNZamEdycjaSprCallback.cs" />
+    <Compile Include="Callbacks\ZaEEdycjaCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XLHydraZaNZamEdycjaSprChild\XLHydraZaNZamEdycjaSprChild.csproj">
-      <Project>{e4fdafb3-cf1f-477a-a0a0-5ec3bc0900e6}</Project>
-      <Name>XLHydraZaNZamEdycjaSprChild</Name>
+    <ProjectReference Include="..\XLHydraZaEEdycjaChild\XLHydraZaEEdycjaChild.csproj">
+      <Project>{a830df47-0a01-485c-8f9f-531a705cb6e7}</Project>
+      <Name>XLHydraZaEEdycjaChild</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -30,19 +30,22 @@ namespace HydraXLStanyZalegajace.Forms.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.BindingSource stanyZalegajaceBindingSource;
             this.dataGridViewStanyZalegajace = new System.Windows.Forms.DataGridView();
+            this.stanyZalegajaceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ZaNOfeEdycjaPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
-            this.barcodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.currencyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            stanyZalegajaceBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.twZMagNumerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.twZMagKodDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.twZTwrNumerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Twr_Kod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Twr_Nazwa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TwZ_IlDok = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Last = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStanyZalegajace)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stanyZalegajaceBindingSource)).BeginInit();
             this.ZaNOfeEdycjaPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(stanyZalegajaceBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewStanyZalegajace
@@ -55,10 +58,14 @@ namespace HydraXLStanyZalegajace.Forms.Forms
             this.dataGridViewStanyZalegajace.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
             this.dataGridViewStanyZalegajace.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStanyZalegajace.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.barcodeDataGridViewTextBoxColumn,
-            this.priceDataGridViewTextBoxColumn,
-            this.currencyDataGridViewTextBoxColumn});
-            this.dataGridViewStanyZalegajace.DataSource = stanyZalegajaceBindingSource;
+            this.twZMagNumerDataGridViewTextBoxColumn,
+            this.twZMagKodDataGridViewTextBoxColumn,
+            this.twZTwrNumerDataGridViewTextBoxColumn,
+            this.Twr_Kod,
+            this.Twr_Nazwa,
+            this.TwZ_IlDok,
+            this.Last});
+            this.dataGridViewStanyZalegajace.DataSource = this.stanyZalegajaceBindingSource;
             this.dataGridViewStanyZalegajace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewStanyZalegajace.GridColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridViewStanyZalegajace.Location = new System.Drawing.Point(0, 0);
@@ -70,6 +77,10 @@ namespace HydraXLStanyZalegajace.Forms.Forms
             this.dataGridViewStanyZalegajace.RowTemplate.Height = 24;
             this.dataGridViewStanyZalegajace.Size = new System.Drawing.Size(599, 290);
             this.dataGridViewStanyZalegajace.TabIndex = 0;
+            // 
+            // stanyZalegajaceBindingSource
+            // 
+            this.stanyZalegajaceBindingSource.DataSource = typeof(HydraXLStanyZalegajace.Core.Models.StanyZalegajace);
             // 
             // ZaNOfeEdycjaPanel
             // 
@@ -118,39 +129,69 @@ namespace HydraXLStanyZalegajace.Forms.Forms
             this.CloseButton.UseVisualStyleBackColor = false;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
-            // barcodeDataGridViewTextBoxColumn
+            // twZMagNumerDataGridViewTextBoxColumn
             // 
-            this.barcodeDataGridViewTextBoxColumn.DataPropertyName = "Barcode";
-            this.barcodeDataGridViewTextBoxColumn.HeaderText = "Barcode";
-            this.barcodeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.barcodeDataGridViewTextBoxColumn.Name = "barcodeDataGridViewTextBoxColumn";
-            this.barcodeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.barcodeDataGridViewTextBoxColumn.Width = 125;
+            this.twZMagNumerDataGridViewTextBoxColumn.DataPropertyName = "TwZ_MagNumer";
+            this.twZMagNumerDataGridViewTextBoxColumn.HeaderText = "Numer magazynu";
+            this.twZMagNumerDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.twZMagNumerDataGridViewTextBoxColumn.Name = "twZMagNumerDataGridViewTextBoxColumn";
+            this.twZMagNumerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.twZMagNumerDataGridViewTextBoxColumn.Width = 125;
             // 
-            // priceDataGridViewTextBoxColumn
+            // twZMagKodDataGridViewTextBoxColumn
             // 
-            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
-            this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
-            this.priceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
-            this.priceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.priceDataGridViewTextBoxColumn.Width = 125;
+            this.twZMagKodDataGridViewTextBoxColumn.DataPropertyName = "TwZ_MagKod";
+            this.twZMagKodDataGridViewTextBoxColumn.HeaderText = "Kod magazynu";
+            this.twZMagKodDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.twZMagKodDataGridViewTextBoxColumn.Name = "twZMagKodDataGridViewTextBoxColumn";
+            this.twZMagKodDataGridViewTextBoxColumn.ReadOnly = true;
+            this.twZMagKodDataGridViewTextBoxColumn.Width = 125;
             // 
-            // currencyDataGridViewTextBoxColumn
+            // twZTwrNumerDataGridViewTextBoxColumn
             // 
-            this.currencyDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.currencyDataGridViewTextBoxColumn.DataPropertyName = "Currency";
-            this.currencyDataGridViewTextBoxColumn.HeaderText = "Currency";
-            this.currencyDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.currencyDataGridViewTextBoxColumn.Name = "currencyDataGridViewTextBoxColumn";
-            this.currencyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.twZTwrNumerDataGridViewTextBoxColumn.DataPropertyName = "TwZ_TwrNumer";
+            this.twZTwrNumerDataGridViewTextBoxColumn.HeaderText = "Numer towaru";
+            this.twZTwrNumerDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.twZTwrNumerDataGridViewTextBoxColumn.Name = "twZTwrNumerDataGridViewTextBoxColumn";
+            this.twZTwrNumerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.twZTwrNumerDataGridViewTextBoxColumn.Width = 125;
             // 
-            // stanyZalegajaceBindingSource
+            // Twr_Kod
             // 
-            stanyZalegajaceBindingSource.AllowNew = false;
-            stanyZalegajaceBindingSource.DataSource = typeof(HydraXLStanyZalegajace.Core.Models.StanyZalegajace);
+            this.Twr_Kod.DataPropertyName = "Twr_Kod";
+            this.Twr_Kod.HeaderText = "Kod towaru";
+            this.Twr_Kod.MinimumWidth = 6;
+            this.Twr_Kod.Name = "Twr_Kod";
+            this.Twr_Kod.ReadOnly = true;
+            this.Twr_Kod.Width = 125;
             // 
-            // ZaNOfeEdycjaForm
+            // Twr_Nazwa
+            // 
+            this.Twr_Nazwa.DataPropertyName = "Twr_Nazwa";
+            this.Twr_Nazwa.HeaderText = "Nazwa towaru";
+            this.Twr_Nazwa.MinimumWidth = 6;
+            this.Twr_Nazwa.Name = "Twr_Nazwa";
+            this.Twr_Nazwa.ReadOnly = true;
+            this.Twr_Nazwa.Width = 125;
+            // 
+            // TwZ_IlDok
+            // 
+            this.TwZ_IlDok.DataPropertyName = "TwZ_IlDok";
+            this.TwZ_IlDok.HeaderText = "TwZ_IlDok";
+            this.TwZ_IlDok.MinimumWidth = 6;
+            this.TwZ_IlDok.Name = "TwZ_IlDok";
+            this.TwZ_IlDok.ReadOnly = true;
+            this.TwZ_IlDok.Width = 125;
+            // 
+            // Last
+            // 
+            this.Last.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Last.HeaderText = "";
+            this.Last.MinimumWidth = 6;
+            this.Last.Name = "Last";
+            this.Last.ReadOnly = true;
+            // 
+            // StanyZalegajaceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -159,11 +200,11 @@ namespace HydraXLStanyZalegajace.Forms.Forms
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ZaNOfeEdycjaPanel);
-            this.Name = "ZaNOfeEdycjaForm";
+            this.Name = "StanyZalegajaceForm";
             this.Text = "Stany zalegające";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStanyZalegajace)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stanyZalegajaceBindingSource)).EndInit();
             this.ZaNOfeEdycjaPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(stanyZalegajaceBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,5 +220,16 @@ namespace HydraXLStanyZalegajace.Forms.Forms
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button CloseButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn twrKodDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn twrNazwaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn twZIlDokDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource stanyZalegajaceBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn twZMagNumerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn twZMagKodDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn twZTwrNumerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Twr_Kod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Twr_Nazwa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TwZ_IlDok;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Last;
     }
 }

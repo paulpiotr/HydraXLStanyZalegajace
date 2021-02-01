@@ -14,19 +14,19 @@ using Hydra;
     "2019.3.0.0",
     "25-01-2021")]
 
-namespace ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprBase.Callbacks
+namespace ZaEEdycja.XLHydraZaEEdycjaBase.Callbacks
 {
-    [SubscribeProcedure(Procedures.ZaNZamEdycjaSpr, "Stany zalegające w oknie Element zamówienia.")]
-    public class ZaNZamEdycjaSprCallback : Callback
+    [SubscribeProcedure(Procedures.ZaEEdycja, "Stany zalegające w oknie Element zamówienia.")]
+    public class ZaEEdycjaCallback : Callback
     {
         public override void Init()
         {
             try
             {
                 AddSubscription(true, 0, Events.JustAfterWindowOpening,
-                    new XLHydraZaNZamEdycjaSprChild.Callbacks.ZaNZamEdycjaSprCallback(this).JustAfterWindowOpening);
+                    new XLHydraZaEEdycjaChild.Callbacks.ZaEEdycjaCallback(this).JustAfterWindowOpening);
                 AddSubscription(false, 0, Events.OpenWindow,
-                    new XLHydraZaNZamEdycjaSprChild.Callbacks.ZaNZamEdycjaSprCallback(this).OnOpenWindow);
+                    new XLHydraZaEEdycjaChild.Callbacks.ZaEEdycjaCallback(this).OnOpenWindow);
             }
             catch (Exception e)
             {

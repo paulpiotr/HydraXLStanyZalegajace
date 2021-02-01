@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3F4216E-0807-4C70-8517-B0420C13CCC2}</ProjectGuid>
+    <ProjectGuid>{A830DF47-0A01-485C-8F9F-531A705CB6E7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprBase</RootNamespace>
-    <AssemblyName>ZaNZamEdycjaSpr.XLHydraZaNZamEdycjaSprBase</AssemblyName>
+    <RootNamespace>ZaEEdycja.XLHydraZaEEdycjaChild</RootNamespace>
+    <AssemblyName>ZaEEdycja.XLHydraZaEEdycjaChild</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,12 +31,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CdnHydra, Version=2019.3.0.0, Culture=neutral, PublicKeyToken=4b3653aa0a875d04, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CdnHydra">
       <HintPath>C:\Program Files (x86)\Comarch ERP XL 2019.3\CdnHydra.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,13 +52,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Callbacks\ZaNZamEdycjaSprCallback.cs" />
+    <Compile Include="Callbacks\ZaEEdycjaCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XLHydraZaNZamEdycjaSprChild\XLHydraZaNZamEdycjaSprChild.csproj">
-      <Project>{e4fdafb3-cf1f-477a-a0a0-5ec3bc0900e6}</Project>
-      <Name>XLHydraZaNZamEdycjaSprChild</Name>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\HydraXLStanyZalegajace.XLHydraChild.Models.StanyZalegajace.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HydraXLStanyZalegajace.Core\HydraXLStanyZalegajace.Core.csproj">
+      <Project>{4d48f456-ce99-4723-8bc8-dc0b6dd794cf}</Project>
+      <Name>HydraXLStanyZalegajace.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HydraXLStanyZalegajace.Forms\HydraXLStanyZalegajace.Forms.csproj">
+      <Project>{1c1f9073-d2cf-4239-a4bd-6b94c2dbdc55}</Project>
+      <Name>HydraXLStanyZalegajace.Forms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

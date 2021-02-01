@@ -141,12 +141,12 @@ namespace ZaNOfeEdycja.XLHydraZaNOfeEdycjaChild.Callbacks
                 while (dataReader.Read())
                 {
                     var zaETwrNumer = (long)Convert.ToDouble(dataReader["ZaE_TwrNumer"].ToString());
-                    var stanyZalegajace = new StanyZalegajace
-                    {
-                        Barcode = $"Barcode {zaETwrNumer}",
-                        Currency = $"Currency {zaETwrNumer}",
-                        Price = $"Price {zaETwrNumer}"
-                    };
+                    var stanyZalegajace = new StanyZalegajace();
+                    //{
+                    //    //Barcode = $"Barcode {zaETwrNumer}",
+                    //    //Currency = $"Currency {zaETwrNumer}",
+                    //    //Price = $"Price {zaETwrNumer}"
+                    //};
                     StanyZalegajaceList.Add(stanyZalegajace);
                 }
 
