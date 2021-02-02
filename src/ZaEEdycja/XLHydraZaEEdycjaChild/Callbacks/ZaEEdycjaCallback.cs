@@ -123,27 +123,33 @@ namespace ZaEEdycja.XLHydraZaEEdycjaChild.Callbacks
         {
             try
             {
-                _parentCallback.GetControl(controlId).Enabled = false;
-                _parentCallback.GetControl(controlId).Visible = false;
-                StanyZalegajaceList.Clear();
-                var cKopTwrKodValueRaw =
-                    Convert.ToString(ParentCallback.GetWindow().Children["?cKop_Twr:Kod"].ValueRaw);
-                SqlConnection sqlConnection = Runtime.ActiveRuntime.Repository.Connection.CreateCommand().Connection;
-                var twrKartyRepository = new TwrKartyRepository();
-                var twrGidNumer = twrKartyRepository.GetTwrGIDNumerByTwrKod(sqlConnection, cKopTwrKodValueRaw);
-                if (twrKartyRepository.HasException())
+                var cMagazyn = Convert.ToString(ParentCallback.GetWindow().Children["?cMagazyn"].ValueRaw);
+                if (null != cMagazyn && !string.IsNullOrWhiteSpace(cMagazyn) && cMagazyn == "SW1")
                 {
-                    MessageBox.Show($@"{twrKartyRepository.TwrKartyRepositoryException.Message}
-{twrKartyRepository.TwrKartyRepositoryException.StackTrace}");
-                }
-                if (twrGidNumer > 0)
-                {
-                    StanyZalegajaceList =
-                        twrKartyRepository.ISKZasobyNierotujaceZSOSStoredProcedure(sqlConnection, twrGidNumer);
+                    _parentCallback.GetControl(controlId).Enabled = false;
+                    _parentCallback.GetControl(controlId).Visible = false;
+                    StanyZalegajaceList.Clear();
+                    var cKopTwrKodValueRaw =
+                        Convert.ToString(ParentCallback.GetWindow().Children["?cKop_Twr:Kod"].ValueRaw);
+                    SqlConnection sqlConnection =
+                        Runtime.ActiveRuntime.Repository.Connection.CreateCommand().Connection;
+                    var twrKartyRepository = new TwrKartyRepository();
+                    var twrGidNumer = twrKartyRepository.GetTwrGIDNumerByTwrKod(sqlConnection, cKopTwrKodValueRaw);
                     if (twrKartyRepository.HasException())
                     {
                         MessageBox.Show($@"{twrKartyRepository.TwrKartyRepositoryException.Message}
 {twrKartyRepository.TwrKartyRepositoryException.StackTrace}");
+                    }
+
+                    if (twrGidNumer > 0)
+                    {
+                        StanyZalegajaceList =
+                            twrKartyRepository.ISKZasobyNierotujaceZSOSStoredProcedure(sqlConnection, twrGidNumer);
+                        if (twrKartyRepository.HasException())
+                        {
+                            MessageBox.Show($@"{twrKartyRepository.TwrKartyRepositoryException.Message}
+{twrKartyRepository.TwrKartyRepositoryException.StackTrace}");
+                        }
                     }
                 }
             }
