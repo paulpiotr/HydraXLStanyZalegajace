@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Hydra;
 using HydraXLStanyZalegajace.Core.Models;
@@ -25,6 +25,8 @@ namespace ZaEEdycja.XLHydraZaEEdycjaChild.Callbacks
 {
     public class ZaEEdycjaCallback : Callback
     {
+        private const int VkF5 = 0x74;
+
         private Callback _parentCallback;
 
         private BindingList<StanyZalegajace> _stanyZalegajaceBindingList;
@@ -123,12 +125,14 @@ namespace ZaEEdycja.XLHydraZaEEdycjaChild.Callbacks
         {
             try
             {
+//#if DEBUG
+//                StanyZalegajaceList.Clear();
+//                StanyZalegajaceList.Add(new StanyZalegajace(1, "Jakiś magazyn kod", "Jakiś magazyn nazwa", 1, "Jakiś bardzo długi kod towaru",
+//                    "Jakiś bardzo długi kod towaru jakiś bardzo długi kod towaru", 2));
+//#else
                 var cMagazyn = Convert.ToString(ParentCallback.GetWindow().Children["?cMagazyn"].ValueRaw);
                 if (null != cMagazyn && !string.IsNullOrWhiteSpace(cMagazyn) && cMagazyn == "SW1")
                 {
-                    _parentCallback.GetControl(controlId).Enabled = false;
-                    _parentCallback.GetControl(controlId).Visible = false;
-                    StanyZalegajaceList.Clear();
                     var cKopTwrKodValueRaw =
                         Convert.ToString(ParentCallback.GetWindow().Children["?cKop_Twr:Kod"].ValueRaw);
                     SqlConnection sqlConnection =
@@ -152,6 +156,8 @@ namespace ZaEEdycja.XLHydraZaEEdycjaChild.Callbacks
                         }
                     }
                 }
+
+//#endif
             }
             catch (Exception e)
             {
@@ -165,9 +171,6 @@ namespace ZaEEdycja.XLHydraZaEEdycjaChild.Callbacks
         private bool OnAfterCloseWindowOpenStanyZalegajaceFormOpen(Procedures procId, int controlId, Events @event) =>
             StanyZalegajaceWindowShow();
 
-        private bool OnAfterCloseWindowOpenStanyZalegajaceFormClose(Procedures procId, int controlId, Events @event) =>
-            true;
-
         private bool StanyZalegajaceWindowShow()
         {
             try
@@ -179,7 +182,6 @@ namespace ZaEEdycja.XLHydraZaEEdycjaChild.Callbacks
                     _stanyZalegajaceForm = new StanyZalegajaceForm(StanyZalegajaceBindingSource);
                     _stanyZalegajaceForm.Show();
                     _stanyZalegajaceForm.Closed += WindowOnClosed;
-                    _stanyZalegajaceForm.Closing += WindowOnClosing;
                     _stanyZalegajaceForm.BringToFront();
                     return false;
                 }
@@ -198,38 +200,30 @@ namespace ZaEEdycja.XLHydraZaEEdycjaChild.Callbacks
             return true;
         }
 
-        private void WindowOnClosing(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                _parentCallback.RemoveSubscription(true, _parentCallback.GetWindow().Id, Events.CloseWindow,
-                    OnAfterCloseWindowOpenStanyZalegajaceFormOpen);
-                _parentCallback.AddSubscription(true, ParentCallback.GetWindow().Id,
-                    Events.CloseWindow, OnAfterCloseWindowOpenStanyZalegajaceFormClose);
-                _parentCallback.PostEvent(_parentCallback.GetWindow().Id, Events.Refresh);
-                _parentCallback.PostEvent(_parentCallback.GetWindow().Id, Events.CloseWindow);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($@"{ex.Message} {ex.StackTrace}");
-            }
-        }
-
         private void WindowOnClosed(object sender, EventArgs e)
         {
             try
             {
                 _parentCallback.RemoveSubscription(true, _parentCallback.GetWindow().Id, Events.CloseWindow,
                     OnAfterCloseWindowOpenStanyZalegajaceFormOpen);
-                _parentCallback.AddSubscription(true, ParentCallback.GetWindow().Id,
-                    Events.CloseWindow, OnAfterCloseWindowOpenStanyZalegajaceFormClose);
-                _parentCallback.PostEvent(_parentCallback.GetWindow().Id, Events.Refresh);
-                _parentCallback.PostEvent(_parentCallback.GetWindow().Id, Events.CloseWindow);
+                _parentCallback.RemoveSubscription(true, ParentCallback.GetWindow().Children["?Cli_Zapisz"].Id,
+                    Events.Accepted, StanyZalegajace);
+                lock (_parentCallback)
+                {
+                    _stanyZalegajaceForm.Invoke(new MethodInvoker(delegate
+                    {
+                        _parentCallback.PostEvent(_parentCallback.GetWindow().Id, Events.CloseWindow);
+                        keybd_event(VkF5, 0, 0, 0);
+                    }));
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($@"{ex.Message}");
             }
         }
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        public static extern void keybd_event(uint bVk, uint bScan, uint dwFlags, uint dwExtraInfo);
     }
 }

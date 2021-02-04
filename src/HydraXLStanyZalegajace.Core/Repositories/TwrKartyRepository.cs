@@ -13,7 +13,6 @@ namespace HydraXLStanyZalegajace.Core.Repositories
 {
     public class TwrKartyRepository
     {
-
         public Exception TwrKartyRepositoryException { get; private set; }
 
         public bool HasException() => null != TwrKartyRepositoryException;
@@ -84,6 +83,7 @@ namespace HydraXLStanyZalegajace.Core.Repositories
                             var stanyZalegajace = new StanyZalegajace(
                                 Convert.ToInt32(dataReader["TwZ_MagNumer"]),
                                 Convert.ToString(dataReader["TwZ_MagKod"]),
+                                Convert.ToString(dataReader["Mag_Nazwa"]),
                                 Convert.ToInt32(dataReader["TwZ_TwrNumer"]),
                                 Convert.ToString(dataReader["Twr_Kod"]),
                                 Convert.ToString(dataReader["Twr_Nazwa"]),

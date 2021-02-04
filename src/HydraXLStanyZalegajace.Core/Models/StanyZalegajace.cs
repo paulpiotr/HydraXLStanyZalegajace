@@ -8,11 +8,14 @@ namespace HydraXLStanyZalegajace.Core.Models
 {
     public class StanyZalegajace
     {
-        //Twr_Nazwa int,
-        private string _twrNazwa;
+        //Mag_Nazwa varchar(50),
+        private string _magNazwa;
 
         //Twr_Kod int,
         private string _twrKod;
+
+        //Twr_Nazwa int,
+        private string _twrNazwa;
 
         //TwZ_IlDok decimal (15,4),
         private decimal _twZIlDok;
@@ -30,11 +33,13 @@ namespace HydraXLStanyZalegajace.Core.Models
         {
         }
 
-        public StanyZalegajace(int twZMagNumer, string twZMagKod, int twZTwrNumer, string twrKod, string twrNazwa,
+        public StanyZalegajace(int twZMagNumer, string twZMagKod, string magNazwa, int twZTwrNumer, string twrKod,
+            string twrNazwa,
             decimal twZIlDok)
         {
             _twZMagNumer = twZMagNumer;
             _twZMagKod = twZMagKod;
+            _magNazwa = magNazwa;
             _twZTwrNumer = twZTwrNumer;
             _twrKod = twrKod;
             _twrNazwa = twrNazwa;
@@ -102,6 +107,19 @@ namespace HydraXLStanyZalegajace.Core.Models
                 if (value != _twrNazwa)
                 {
                     _twrNazwa = value;
+                }
+            }
+        }
+
+        [Display(Name = "Nazwa magazynu", Prompt = "Nazwa magazynu", Description = "Nazwa magazynu")]
+        public string Mag_Nazwa
+        {
+            get => _magNazwa;
+            set
+            {
+                if (value != _magNazwa)
+                {
+                    _magNazwa = value;
                 }
             }
         }
